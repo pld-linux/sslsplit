@@ -3,15 +3,16 @@ Name:		sslsplit
 Version:	0.4.11
 Release:	1
 License:	BSD
-URL:		http://www.roe.ch/SSLsplit
 Source0:	https://github.com/droe/sslsplit/archive/%{version}.tar.gz
 # Source0-md5:	37fe63d0b60268ae48e797a22a39c2da
 Group:		Applications/System
+URL:		http://www.roe.ch/SSLsplit
 BuildRequires:	check-devel
 BuildRequires:	libevent-devel
 BuildRequires:	openssl-devel
 Requires:	iproute2
 Requires:	iptables
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 SSLsplit is a tool for man-in-the-middle attacks against SSL/TLS
@@ -34,10 +35,10 @@ It uses Linux netfilter REDIRECT and TPROXY.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_bindir} $RPM_BUILD_ROOT%{_mandir}/man1/
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man1}
 
-cp -a %{name} $RPM_BUILD_ROOT%{_bindir}
-cp -a %{name}.1  $RPM_BUILD_ROOT%{_mandir}/man1/
+install -p %{name} $RPM_BUILD_ROOT%{_bindir}
+cp -p %{name}.1  $RPM_BUILD_ROOT%{_mandir}/man1
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -45,5 +46,5 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc README.md NEWS.md
-%attr(755,root,root) %{_bindir}/%{name}
+%attr(755,root,root) %{_bindir}/sslsplit
 %{_mandir}/man1/sslsplit.1*
