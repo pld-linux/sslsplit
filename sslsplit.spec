@@ -1,7 +1,7 @@
 Summary:	Transparent and scalable SSL/TLS interception
 Name:		sslsplit
 Version:	0.5.4
-Release:	1
+Release:	2
 License:	BSD
 Source0:	https://github.com/droe/sslsplit/archive/%{version}.tar.gz
 # Source0-md5:	c9173a87936941d7e56f90245862efdc
