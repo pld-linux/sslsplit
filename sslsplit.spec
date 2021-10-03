@@ -2,13 +2,14 @@ Summary:	Transparent and scalable SSL/TLS interception
 Summary(pl.UTF-8):	Przezroczyste i skalowalne przechwytywanie SSL/TLS
 Name:		sslsplit
 Version:	0.5.5
-Release:	1
+Release:	2
 License:	BSD
 Group:		Applications/System
 # see also https://github.com/droe/sslsplit/releases
 #Source0:	https://github.com/droe/sslsplit/archive/%{version}/%{name}-%{version}.tar.gz
 Source0:	https://mirror.roe.ch/rel/sslsplit/%{name}-%{version}.tar.bz2
 # Source0-md5:	c9628996a930bd18ce8e635dbedf0362
+Patch0:		openssl3.patch
 URL:		https://www.roe.ch/SSLsplit
 BuildRequires:	check-devel
 BuildRequires:	libevent-devel >= 2
@@ -46,10 +47,12 @@ netfiltra.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %{__make} \
 	CC="%{__cc}" \
+	CFLAGS="%{rpmcflags} %{rpmcppflags}" \
 	DEBUG_CFLAGS="%{rpmcflags} %{rpmcppflags}" \
 	PKG_LDFLAGS="%{rpmldflags}"
 
